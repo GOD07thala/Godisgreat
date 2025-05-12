@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel</title>
+  <script>
+    function createKey() {
+      const key = document.getElementById('newKey').value;
+      const minutes = parseInt(document.getElementById('expiry').value);
+      const expiry = Date.now() + minutes * 60000;
+      const keys = JSON.parse(localStorage.getItem('keys')) || [];
+      keys.push({ key, expiry });
+      localStorage.setItem('keys', JSON.stringify(keys));
+      alert("Key Created!");
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center h-screen">
+  <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md">
+    <h1 class="text-2xl font-bold mb-4 text-center">Admin Key Generator</h1>
+    <input id="newKey" type="text" placeholder="Enter Key Name" class="w-full p-2 rounded bg-gray-700 text-white mb-4"/>
+    <input id="expiry" type="number" placeholder="Expiry in minutes" class="w-full p-2 rounded bg-gray-700 text-white mb-4"/>
+    <button onclick="createKey()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded">Create Key</button>
+  </div>
+</body>
+</html>
